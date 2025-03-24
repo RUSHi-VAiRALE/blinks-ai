@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import '../styles/gradients.css';
@@ -7,28 +7,115 @@ import logo from "../../public/blinksai.png"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Add event listener
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Navigation links array
+  const navLinks = [
+    { name: 'About', href: '/about' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'AI Agent Development', href: '/ai-agent-development' }
+  ];
+
+  // Services submenu array
+  const serviceCategories = [
+    {
+      name: 'Development',
+      subItems: [
+        { name: 'Web Development', href: '/services/development/web' },
+        { name: 'App Development', href: '/services/development/app' },
+        { name: 'Custom Software', href: '/services/development/custom' }
+      ]
+    },
+    {
+      name: 'Video Editing',
+      subItems: [
+        { name: 'General Editing', href: '/services/video-editing/general' }
+      ]
+    },
+    {
+      name: 'Reels Editing',
+      subItems: [
+        { name: 'Basics', href: '/services/reels-editing/basics' },
+        { name: 'PIP', href: '/services/reels-editing/pip' },
+        { name: 'Motion Graphics', href: '/services/reels-editing/motion' }
+      ]
+    },
+    {
+      name: 'Graphic Design',
+      subItems: [
+        { name: 'Poster Design', href: '/services/graphic-design/poster' },
+        { name: 'Logo Design', href: '/services/graphic-design/logo' },
+        { name: 'Magazine Design', href: '/services/graphic-design/magazine' }
+      ]
+    },
+    {
+      name: 'Lead Generation',
+      subItems: [
+        { name: 'Meta Ads', href: '/services/lead-generation/meta' },
+        { name: 'Twitter Ads', href: '/services/lead-generation/twitter' },
+        { name: 'LinkedIn Ads', href: '/services/lead-generation/linkedin' },
+        { name: 'Google Ads', href: '/services/lead-generation/google' }
+      ]
+    },
+    {
+      name: 'SEO',
+      href: '/services/seo',
+      noSubItems: true
+    },
+    {
+      name: 'Copywriting',
+      href: '/services/copywriting',
+      noSubItems: true
+    },
+    {
+      name: 'Social Media Management',
+      subItems: [
+        { name: 'Meta Management', href: '/services/social-media/meta' },
+        { name: 'YouTube Management', href: '/services/social-media/youtube' },
+        { name: 'LinkedIn Management', href: '/services/social-media/linkedin' },
+        { name: 'Twitter Management', href: '/services/social-media/twitter' }
+      ]
+    }
+  ];
+
   return (
     <>
-      {/* Top left white gradient effect */}
-      <div className="gradient-top-left"></div>
-      
-      {/* Top right white gradient effect */}
+      {/* Gradient effects - responsive adjustments */}
       <div className="gradient-top-right"></div>
+      {/* <div className="gradient-conical hidden md:block"></div> */}
       
-      <nav className="bg-transparent text-white py-4 px-6 md:px-12 relative z-10">
-        <div className="max-w-7xl mx-auto flex items-center">
+      {/* Elliptical gradient effects - hidden on mobile */}
+      <div className="elliptical-gradient-1 hidden md:block"></div>
+      <div className="elliptical-gradient-2 hidden md:block"></div>
+      
+      <nav className="bg-transparent text-white py-0 px-6 md:px-0 relative z-10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0 mr-8">
             <Image 
               src={logo}
               alt="Logo"
-              width={600}
-              height={600}
               className="w-36 h-36"
             />
           </div>
@@ -44,154 +131,47 @@ const Navbar = () => {
                 </svg>
               </button>
               <div className="absolute left-0 mt-2 w-64 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                {/* Development Submenu */}
-                <div className="relative group/dev px-4 py-3 hover:bg-gray-800/50">
-                  <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
-                    Development
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/dev:opacity-100 group-hover/dev:visible transition-all duration-300">
-                    <Link href="/services/development/web" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Web Development
+                {/* Map through service categories */}
+                {serviceCategories.map((category, index) => (
+                  category.noSubItems ? (
+                    <Link 
+                      key={index} 
+                      href={category.href} 
+                      className="block px-4 py-3 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                    >
+                      {category.name}
                     </Link>
-                    <Link href="/services/development/app" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      App Development
-                    </Link>
-                    <Link href="/services/development/custom" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Custom Software
-                    </Link>
-                  </div>
-                </div>
-                
-                {/* Video Editing Submenu */}
-                <div className="relative group/video px-4 py-3 hover:bg-gray-800/50">
-                  <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
-                    Video Editing
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/video:opacity-100 group-hover/video:visible transition-all duration-300">
-                    <Link href="/services/video-editing/general" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      General Editing
-                    </Link>
-                  </div>
-                </div>
-                
-                {/* Reels Editing Submenu */}
-                <div className="relative group/reels px-4 py-3 hover:bg-gray-800/50">
-                  <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
-                    Reels Editing
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/reels:opacity-100 group-hover/reels:visible transition-all duration-300">
-                    <Link href="/services/reels-editing/basics" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Basics
-                    </Link>
-                    <Link href="/services/reels-editing/pip" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      PIP
-                    </Link>
-                    <Link href="/services/reels-editing/motion" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Motion Graphics
-                    </Link>
-                  </div>
-                </div>
-                
-                {/* Graphic Design Submenu */}
-                <div className="relative group/graphic px-4 py-3 hover:bg-gray-800/50">
-                  <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
-                    Graphic Design
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/graphic:opacity-100 group-hover/graphic:visible transition-all duration-300">
-                    <Link href="/services/graphic-design/poster" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Poster Design
-                    </Link>
-                    <Link href="/services/graphic-design/logo" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Logo Design
-                    </Link>
-                    <Link href="/services/graphic-design/magazine" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Magazine Design
-                    </Link>
-                  </div>
-                </div>
-                
-                {/* Lead Generation Submenu */}
-                <div className="relative group/lead px-4 py-3 hover:bg-gray-800/50">
-                  <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
-                    Lead Generation
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/lead:opacity-100 group-hover/lead:visible transition-all duration-300">
-                    <Link href="/services/lead-generation/meta" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Meta Ads
-                    </Link>
-                    <Link href="/services/lead-generation/twitter" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Twitter Ads
-                    </Link>
-                    <Link href="/services/lead-generation/linkedin" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      LinkedIn Ads
-                    </Link>
-                    <Link href="/services/lead-generation/google" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Google Ads
-                    </Link>
-                  </div>
-                </div>
-                
-                {/* SEO Link */}
-                <Link href="/services/seo" className="block px-4 py-3 text-gray-300 hover:bg-gray-800/50 hover:text-white">
-                  SEO
-                </Link>
-                
-                {/* Copywriting Link */}
-                <Link href="/services/copywriting" className="block px-4 py-3 text-gray-300 hover:bg-gray-800/50 hover:text-white">
-                  Copywriting
-                </Link>
-                
-                {/* Social Media Management Submenu */}
-                <div className="relative group/social px-4 py-3 hover:bg-gray-800/50">
-                  <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
-                    Social Media Management
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/social:opacity-100 group-hover/social:visible transition-all duration-300">
-                    <Link href="/services/social-media/meta" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Meta Management
-                    </Link>
-                    <Link href="/services/social-media/youtube" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      YouTube Management
-                    </Link>
-                    <Link href="/services/social-media/linkedin" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      LinkedIn Management
-                    </Link>
-                    <Link href="/services/social-media/twitter" className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white">
-                      Twitter Management
-                    </Link>
-                  </div>
-                </div>
+                  ) : (
+                    <div key={index} className="relative group/submenu px-4 py-3 hover:bg-gray-800/50">
+                      <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
+                        {category.name}
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                      <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/submenu:opacity-100 group-hover/submenu:visible transition-all duration-300">
+                        {category.subItems.map((item, subIndex) => (
+                          <Link 
+                            key={subIndex} 
+                            href={item.href} 
+                            className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                ))}
               </div>
             </div>
             
-            <Link href="/about" className="hover:text-gray-300 text-gray-300">
-              About
-            </Link>
-            <Link href="/testimonials" className="hover:text-gray-300 text-gray-300">
-              Testimonials
-            </Link>
-            <Link href="/ai-agent-development" className="hover:text-gray-300 text-gray-300">
-              AI Agent Development
-            </Link>
-           
+            {/* Map through main navigation links */}
+            {navLinks.map((link, index) => (
+              <Link key={index} href={link.href} className="hover:text-gray-300 text-gray-300">
+                {link.name}
+              </Link>
+            ))}
           </div>
           
           {/* Get Started Button - pushed to the right */}
@@ -208,7 +188,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden ml-auto">
             <button 
               onClick={toggleMenu}
               className="text-white focus:outline-none"
@@ -228,26 +208,60 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pt-4 border-t border-gray-700">
-            <div className="flex flex-col space-y-4 px-2">
-              <Link href="/docs" className="hover:text-gray-300 py-2">
-                Docs
-              </Link>
-              <Link href="/components" className="hover:text-gray-300 py-2">
-                Components
-              </Link>
-              <Link href="/about" className="hover:text-gray-300 py-2">
-                About
-              </Link>
-              <Link href="/pricing" className="hover:text-gray-300 py-2">
-                Pricing
-              </Link>
-              <Link href="/testimonials" className="hover:text-gray-300 py-2">
-                Testimonials
-              </Link>
+          <div className="md:hidden mt-4 pt-4 border-t border-gray-700 bg-black/90 backdrop-blur-sm rounded-lg">
+            <div className="flex flex-col space-y-2 px-4 py-2">
+              {/* Services accordion for mobile */}
+              <div className="py-2">
+                <button 
+                  onClick={() => setServicesOpen(!servicesOpen)} 
+                  className="flex items-center justify-between w-full text-left hover:text-gray-300 py-2"
+                >
+                  <span>Services</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Mobile services submenu */}
+                {servicesOpen && (
+                  <div className="pl-4 mt-2 border-l border-gray-700 space-y-2">
+                    {serviceCategories.map((category, index) => (
+                      <div key={index} className="py-1">
+                        {category.noSubItems ? (
+                          <Link href={category.href} className="block hover:text-gray-300 py-1">
+                            {category.name}
+                          </Link>
+                        ) : (
+                          <>
+                            <div className="flex items-center justify-between w-full text-left hover:text-gray-300 py-1">
+                              {category.name}
+                            </div>
+                            <div className="pl-4 mt-1 border-l border-gray-700 space-y-1">
+                              {category.subItems.map((item, subIndex) => (
+                                <Link key={subIndex} href={item.href} className="block hover:text-gray-300 py-1 text-sm">
+                                  {item.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Map through main navigation links for mobile */}
+              {navLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="hover:text-gray-300 py-2">
+                  {link.name}
+                </Link>
+              ))}
+              
+              {/* Get Started button for mobile */}
               <Link 
                 href="/get-started"
-                className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-200 transition-colors w-full text-left flex items-center gap-1"
+                className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-200 transition-colors w-full text-left flex items-center gap-1 mt-2"
               >
                 Get Started
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
