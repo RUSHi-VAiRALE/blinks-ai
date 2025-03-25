@@ -1,78 +1,212 @@
-import React from 'react';
+'use client'
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import logo from '../../public/blinksaiimg.jpg';
+
+// Split text animation component
+const SplitTextAnimation = ({ text }) => {
+  // Split text into words
+  const words = text.split(" ");
+  
+  // Container for words
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
+    }),
+  };
+  
+  // Word animation
+  const child = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
+  
+  return (
+    <motion.div
+      style={{ overflow: "hidden" }}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className="flex flex-wrap"
+    >
+      {words.map((word, index) => (
+        <motion.span
+          key={index}
+          variants={child}
+          className="mr-1 mb-1"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
 
 const HeroSection = () => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [borderColor, setBorderColor] = useState('rgba(75, 85, 99, 0.6)');
+  
+  // Animation for input border when focused
+  useEffect(() => {
+    if (isFocused) {
+      const colors = ['#3B82F6', '#8B5CF6', '#EC4899', '#3B82F6'];
+      let colorIndex = 0;
+      
+      const interval = setInterval(() => {
+        setBorderColor(colors[colorIndex]);
+        colorIndex = (colorIndex + 1) % colors.length;
+      }, 500);
+      
+      return () => clearInterval(interval);
+    } else {
+      setBorderColor('rgba(75, 85, 99, 0.6)');
+    }
+  }, [isFocused]);
+  
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-between py-16 px-4 lg:px-12 min-h-[500px] bg-black text-white">
-      {/* Left side - Text content */}
-      <div className="lg:w-1/2 mb-10 lg:mb-0">
-        <h1 className="text-6xl font-bold leading-tight mb-4">
-          Build sleek<br />
-          UI faster
-        </h1>
-        <p className="text-gray-400 mb-8 max-w-md">
-          Redefined UI building for developers. Quickly add components,
-          themes, and responsive layouts to your app at any scale.
-        </p>
-        <div className="flex items-center gap-6">
-          <Link href="/get-started" className="bg-white text-black px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors">
-            Get Started
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
-          </Link>
-          <Link href="/docs" className="text-white flex items-center gap-2 hover:text-gray-300 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-            </svg>
-            Documentation
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </Link>
-        </div>
-      </div>
-
-      {/* Right side - Card with logo */}
-      <div className="lg:w-1/2 flex justify-center">
-        <div className="bg-zinc-900 rounded-2xl p-8 w-full max-w-md relative overflow-hidden shadow-lg">
-          {/* Custom gradient overlay with the bright spot at top right corner */}
-          <div className="absolute -top-5 -right-5" 
-               style={{
-                 width: '500px',
-                 height: '500px',
-                 background: 'radial-gradient(circle at top right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 3%, rgba(255, 255, 255, 0.7) 8%, rgba(255, 255, 255, 0.45) 15%, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.02) 60%, transparent 80%)',
-                 pointerEvents: 'none',
-                 zIndex: 1
-               }}>
-          </div>
-          
-          <div className="flex justify-between items-start mb-12 relative z-10">
-            <h2 className="text-3xl font-bold">Atomix</h2>
-            <div className="text-right">
-              <p className="text-gray-500 text-sm">Not any usual</p>
-              <p className="text-3xl font-bold">UI Library</p>
+    <div className="bg-black text-white py-16 relative">
+      <div className="max-w-7xl mx-auto px-6 md:px-0">
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+          {/* Left side - Brand description */}
+          <div className="lg:w-2/5 min-h-[400px] flex flex-col">
+            <h1 className="text-2xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text">
+                Transforming Ideas Into Digital Reality
+              </span>
+            </h1>
+            <p className="text-gray-300 text-lg leading-relaxed mb-8 line-clamp-2">
+              All blinks ai services are seamlessly integrated, offering a cohesive and unified platform that addresses all aspects of digital transformation. From initial strategy and design to development, deployment, and beyond, zencodx provides a comprehensive ecosystem that supports businesses at every stage of their digital journey.
+            </p>
+            <div className="flex items-center gap-6 mt-auto">
+              <Link href="/get-started" className="bg-white text-black px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors">
+                Get Started
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </Link>
+              <Link href="/services" className="text-white flex items-center gap-2 hover:text-gray-300 transition-colors">
+                Our Services
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </Link>
             </div>
           </div>
-          
-          <div className="flex justify-center mb-8">
-            <div className="relative w-32 h-32 bg-zinc-800 rounded-2xl flex items-center justify-center shadow-md">
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-2xl"></div>
-              <div className="relative w-16 h-16 bg-black rounded-lg flex items-center justify-center transform rotate-45 shadow-inner">
-                <div className="w-8 h-8 bg-white rounded-sm transform -rotate-45 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="none">
-                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4c1.86 0 3.41 1.28 3.86 3H8.14c.45-1.72 2-3 3.86-3zm0 14c-1.86 0-3.41-1.28-3.86-3h7.72c-.45 1.72-2 3-3.86 3z" />
-                  </svg>
+
+          {/* Right side - Card with gradient and content */}
+          <div className="lg:w-3/5 flex justify-center min-h-[400px]">
+            <div className="bg-zinc-900 rounded-2xl p-8 w-full max-w-2xl relative overflow-hidden shadow-lg">
+              {/* Custom gradient overlay with the bright spot at top right corner */}
+              <div className="absolute -top-5 -right-5" 
+                  style={{
+                    width: '500px',
+                    height: '500px',
+                    background: 'radial-gradient(circle at top right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 3%, rgba(255, 255, 255, 0.7) 8%, rgba(255, 255, 255, 0.45) 15%, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.02) 60%, transparent 80%)',
+                    pointerEvents: 'none',
+                    zIndex: 1
+                  }}>
+              </div>
+              
+              {/* Content with image on left and text on right */}
+              <div className="relative z-10">
+                {/* Header with title */}
+                <div className="flex flex-col items-start mb-8">
+                  <div className="relative">
+                    <h2 className="text-4xl font-extrabold tracking-tight">
+                      blinks<span className="bg-gradient-to-r from-zinc-300 via-white to-zinc-400 text-transparent bg-clip-text">ai</span>
+                    </h2>
+                    <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                  </div>
+                  <p className="text-xs font-light tracking-widest mt-2 text-zinc-400 uppercase">
+                    Redefining the future of <span className="text-white">intelligent</span> technology
+                  </p>
+                </div>
+                
+                {/* Two-column layout with image on left and split text/input on right */}
+                <div className="flex gap-6 mb-6">
+                  {/* Left column - Image/Logo */}
+                  <div className="w-1/2">
+                    <div className="relative w-full aspect-square bg-zinc-800 rounded-2xl flex items-center justify-center shadow-md">
+                      <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-2xl">
+                      <Image src={logo} alt="Logo" fill className='rounded-2xl' />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Right column - Split text animation and animated input */}
+                  <div className="w-1/2 flex flex-col justify-center">
+                    <div className="mb-6 h-24 overflow-hidden text-lg">
+                      <SplitTextAnimation text="Discover how AI can revolutionize your business. From automation to insights, we've got you covered." />
+                    </div>
+                    
+                    {/* Animated input box */}
+                    <div className="relative mt-4 group">
+                      {/* Gradient border background with glow effect */}
+                      <div 
+                        className={`absolute -inset-0.5 bg-gradient-to-r from-zinc-400 via-white to-zinc-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-300 ${isFocused ? 'opacity-100' : ''}`}
+                      ></div>
+                      
+                      {/* Inner background for input */}
+                      <div className="relative bg-zinc-900 rounded-lg p-0.5">
+                        <input
+                          type="text"
+                          value={inputValue}
+                          onChange={(e) => setInputValue(e.target.value)}
+                          onFocus={() => setIsFocused(true)}
+                          onBlur={() => setIsFocused(false)}
+                          placeholder="What's in your mind?"
+                          className="w-full bg-zinc-800 text-white px-4 py-3 rounded-md focus:outline-none relative z-10 transition-all duration-300 placeholder-gray-400"
+                        />
+                        
+                        {/* Animated send button */}
+                        <motion.div 
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-gradient-to-r from-zinc-300 to-white p-2 rounded-full"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          animate={{ 
+                            boxShadow: isFocused ? 
+                              ['0 0 0 0 rgba(255, 255, 255, 0)', '0 0 0 4px rgba(255, 255, 255, 0.3)', '0 0 0 0 rgba(255, 255, 255, 0)'] : 
+                              'none'
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            repeatType: "reverse"
+                          }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div className="text-center">
-            <p className="font-medium">Mihir I Dev</p>
-            <p className="text-gray-500 text-sm">Creator & Maintainer</p>
           </div>
         </div>
       </div>
