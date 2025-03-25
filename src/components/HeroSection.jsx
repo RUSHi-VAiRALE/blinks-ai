@@ -47,13 +47,13 @@ const SplitTextAnimation = ({ text }) => {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="flex flex-wrap"
+      className="flex flex-wrap justify-between h-full items-center gap-0.5"
     >
       {words.map((word, index) => (
         <motion.span
           key={index}
           variants={child}
-          className="mr-1 mb-1"
+          className="mr-0.5 mb-0.5 inline-block"
         >
           {word}
         </motion.span>
@@ -87,12 +87,12 @@ const HeroSection = () => {
   return (
     <div className="bg-black text-white py-16 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-0">
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-6">
           {/* Left side - Brand description */}
-          <div className="lg:w-2/5 min-h-[400px] flex flex-col">
-            <h1 className="text-2xl md:text-7xl font-bold mb-6">
+          <div className="lg:w-3/5 min-h-[400px] flex flex-col">
+            <h1 className="text-2xl w-full md:text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text">
-                Transforming Ideas Into Digital Reality
+              AI-powered solutions to scale your business
               </span>
             </h1>
             <p className="text-gray-300 text-lg leading-relaxed mb-8 line-clamp-2">
@@ -157,7 +157,7 @@ const HeroSection = () => {
                   
                   {/* Right column - Split text animation and animated input */}
                   <div className="w-1/2 flex flex-col justify-center">
-                    <div className="mb-6 h-24 overflow-hidden text-lg">
+                    <div className="mb-6 h-auto min-h-[120px] overflow-visible text-lg">
                       <SplitTextAnimation text="Discover how AI can revolutionize your business. From automation to insights, we've got you covered." />
                     </div>
                     

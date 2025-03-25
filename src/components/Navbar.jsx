@@ -9,6 +9,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [openCategories, setOpenCategories] = useState([]);
+  const [openSubItems, setOpenSubItems] = useState([]);
 
   // Check if device is mobile
   useEffect(() => {
@@ -28,6 +30,22 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleCategoryOpen = (index) => {
+    if (openCategories.includes(index)) {
+      setOpenCategories(openCategories.filter(category => category !== index));
+    } else {
+      setOpenCategories([...openCategories, index]);
+    }
+  };
+
+  const toggleSubItemOpen = (index, subIndex) => {
+    if (openSubItems.includes(`${index}-${subIndex}`)) {
+      setOpenSubItems(openSubItems.filter(item => item !== `${index}-${subIndex}`));
+    } else {
+      setOpenSubItems([...openSubItems, `${index}-${subIndex}`]);
+    }
   };
 
   // Navigation links array
@@ -50,15 +68,41 @@ const Navbar = () => {
     {
       name: 'Video Editing',
       subItems: [
-        { name: 'General Editing', href: '/services/video-editing/general' }
+        { 
+          name: 'Youtube Video Editing', 
+          subSubItems: [
+            { name: 'Basics', href: '/services/video-editing/youtube/basics' },
+            { name: 'PIP', href: '/services/video-editing/youtube/pip' },
+            { name: 'Motion Graphics', href: '/services/video-editing/youtube/motion' }
+          ]
+        },
+        { 
+          name: 'Reels/Shorts Editing', 
+          subSubItems: [
+            { name: 'Basics', href: '/services/video-editing/reels-shorts/basics' },
+            { name: 'PIP', href: '/services/video-editing/reels-shorts/pip' },
+            { name: 'Motion Graphics', href: '/services/video-editing/reels-shorts/motion' }
+          ]
+        }
       ]
     },
     {
-      name: 'Reels Editing',
+      name: 'SEO',
       subItems: [
-        { name: 'Basics', href: '/services/reels-editing/basics' },
-        { name: 'PIP', href: '/services/reels-editing/pip' },
-        { name: 'Motion Graphics', href: '/services/reels-editing/motion' }
+        { name: 'On-Page SEO', href: '/services/seo/on-page' },
+        { name: 'Off-Page SEO', href: '/services/seo/off-page' },
+        { name: 'Local SEO', href: '/services/seo/local' },
+        { name: 'Technical SEO', href: '/services/seo/technical' }
+      ]
+    },
+    {
+      name: 'Copywriting',
+      subItems: [
+        { name: 'SEO Copywriting', href: '/services/copywriting/seo' },
+        { name: 'Technical Copywriting', href: '/services/copywriting/technical' },
+        { name: 'Marketing Copywriting', href: '/services/copywriting/marketing' },
+        { name: 'Social Media Copywriting', href: '/services/copywriting/social-media' },
+        { name: 'B2B Copywriting', href: '/services/copywriting/b2b' }
       ]
     },
     {
@@ -77,16 +121,6 @@ const Navbar = () => {
         { name: 'LinkedIn Ads', href: '/services/lead-generation/linkedin' },
         { name: 'Google Ads', href: '/services/lead-generation/google' }
       ]
-    },
-    {
-      name: 'SEO',
-      href: '/services/seo',
-      noSubItems: true
-    },
-    {
-      name: 'Copywriting',
-      href: '/services/copywriting',
-      noSubItems: true
     },
     {
       name: 'Social Media Management',
@@ -151,13 +185,35 @@ const Navbar = () => {
                       </button>
                       <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/submenu:opacity-100 group-hover/submenu:visible transition-all duration-300">
                         {category.subItems.map((item, subIndex) => (
-                          <Link 
-                            key={subIndex} 
-                            href={item.href} 
-                            className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white"
-                          >
-                            {item.name}
-                          </Link>
+                          item.subSubItems ? (
+                            <div key={subIndex} className="relative group/subsubmenu px-4 py-2 hover:bg-gray-800 hover:text-white">
+                              <button className="flex items-center justify-between w-full text-left text-gray-300 hover:text-white">
+                                {item.name}
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </button>
+                              <div className="absolute left-full top-0 w-56 bg-gray-900/95 border border-gray-800 rounded-md shadow-xl opacity-0 invisible group-hover/subsubmenu:opacity-100 group-hover/subsubmenu:visible transition-all duration-300">
+                                {item.subSubItems.map((subItem, subSubIndex) => (
+                                  <Link 
+                                    key={subSubIndex} 
+                                    href={subItem.href} 
+                                    className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white"
+                                  >
+                                    {subItem.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            <Link 
+                              key={subIndex} 
+                              href={item.href} 
+                              className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white"
+                            >
+                              {item.name}
+                            </Link>
+                          )
                         ))}
                       </div>
                     </div>
@@ -234,15 +290,53 @@ const Navbar = () => {
                         ) : (
                           <>
                             <div className="flex items-center justify-between w-full text-left hover:text-gray-300 py-1">
-                              {category.name}
+                              <span>{category.name}</span>
+                              <button 
+                                onClick={() => toggleCategoryOpen(index)}
+                                className="focus:outline-none"
+                              >
+                                <svg className={`w-4 h-4 transform ${openCategories.includes(index) ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </button>
                             </div>
-                            <div className="pl-4 mt-1 border-l border-gray-700 space-y-1">
-                              {category.subItems.map((item, subIndex) => (
-                                <Link key={subIndex} href={item.href} className="block hover:text-gray-300 py-1 text-sm">
-                                  {item.name}
-                                </Link>
-                              ))}
-                            </div>
+                            {openCategories.includes(index) && (
+                              <div className="pl-4 mt-1 border-l border-gray-700 space-y-1">
+                                {category.subItems.map((item, subIndex) => (
+                                  item.subSubItems ? (
+                                    <div key={subIndex} className="py-1">
+                                      <div className="flex items-center justify-between w-full text-left hover:text-gray-300 py-1">
+                                        <span>{item.name}</span>
+                                        <button 
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            toggleSubItemOpen(index, subIndex);
+                                          }}
+                                          className="focus:outline-none"
+                                        >
+                                          <svg className={`w-4 h-4 transform ${openSubItems.includes(`${index}-${subIndex}`) ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                          </svg>
+                                        </button>
+                                      </div>
+                                      {openSubItems.includes(`${index}-${subIndex}`) && (
+                                        <div className="pl-4 mt-1 border-l border-gray-700 space-y-1">
+                                          {item.subSubItems.map((subItem, subSubIndex) => (
+                                            <Link key={subSubIndex} href={subItem.href} className="block hover:text-gray-300 py-1 text-sm">
+                                              {subItem.name}
+                                            </Link>
+                                          ))}
+                                        </div>
+                                      )}
+                                    </div>
+                                  ) : (
+                                    <Link key={subIndex} href={item.href} className="block hover:text-gray-300 py-1 text-sm">
+                                      {item.name}
+                                    </Link>
+                                  )
+                                ))}
+                              </div>
+                            )}
                           </>
                         )}
                       </div>
