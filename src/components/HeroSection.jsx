@@ -176,7 +176,7 @@ const HeroSection = () => {
                           onChange={(e) => setInputValue(e.target.value)}
                           onFocus={() => setIsFocused(true)}
                           onBlur={() => setIsFocused(false)}
-                          placeholder="What's in your mind?"
+                          placeholder="What's on your mind?"
                           className="w-full bg-zinc-800 text-white px-4 py-3 rounded-md focus:outline-none relative z-10 transition-all duration-300 placeholder-gray-400"
                         />
                         
