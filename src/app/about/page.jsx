@@ -91,7 +91,7 @@ const AboutPage = () => {
             
             <motion.div variants={fadeIn} className="mb-10 text-center md:text-left">
               <p className="text-gray-300 mb-6 leading-relaxed">
-                After two years in the digital marketing industry, I, <span className="font-bold bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text border-b border-white/50 pb-0.5">Alok Kumar</span> (Founder & CEO of <span className="font-bold bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text border-b border-white/50 pb-0.5">Zencodx</span>), 
+                After two years in the digital marketing industry, I, <span className="font-bold bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text border-b border-white/50 pb-0.5">Alok Kumar</span> (Founder & CEO of <span className="font-bold bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text border-b border-white/50 pb-0.5">blinksai</span>), 
                 realized the biggest challenges businesses face:
               </p>
             </motion.div>
