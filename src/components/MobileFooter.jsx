@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React,{useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { socialLinks, quickLinks } from '../data/footerData';
@@ -46,6 +46,8 @@ const SocialIcon = ({ name }) => {
 
 const MobileFooter = () => {
   // Simplified services for mobile view
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const simplifiedServices = serviceCategories.map(category => ({
     name: category.name,
     href: `/services#${category.name.toLowerCase().replace(/\s+/g, '-')}`
@@ -126,15 +128,27 @@ const MobileFooter = () => {
         <p className="text-sm text-gray-400 mb-4 text-center">
           Subscribe to our newsletter for the latest updates on AI innovations and services.
         </p>
-        <form className="space-y-2 max-w-xs mx-auto">
-          <div className="relative">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="w-full bg-zinc-900 border border-zinc-700 rounded-md py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:border-white"
-              required
-            />
-          </div>
+        <form className="space-y-5 max-w-xs mx-auto">
+          {/* Animated input box */}
+              <div className="relative mt-2 sm:mt-4 group">
+                      {/* Gradient border background with glow effect */}
+                      <div 
+                        className={`absolute -inset-0.5 bg-gradient-to-r from-zinc-400 via-white to-zinc-600 rounded-lg blur-sm opacity-80 group-hover:opacity-100 transition duration-300 ${isFocused ? 'opacity-100' : ''}`}
+                      ></div>
+                      
+                      {/* Inner background for input */}
+                      <div className="relative bg-zinc-900 rounded-lg p-0.5">
+                        <input
+                          type="text"
+                          value={inputValue}
+                          onChange={(e) => setInputValue(e.target.value)}
+                          onFocus={() => setIsFocused(true)}
+                          onBlur={() => setIsFocused(false)}
+                          placeholder="Enter your email"
+                          className="w-full bg-zinc-800 text-white px-4 sm:px-4 py-3 sm:py-3 rounded-md focus:outline-none relative z-10 transition-all duration-300 placeholder-gray-400 text-sm sm:text-base"
+                        />
+                      </div>
+                    </div>
           <button
             type="submit"
             className="w-full bg-white text-black font-medium py-2 px-4 rounded-md hover:bg-gray-200 transition-colors"
