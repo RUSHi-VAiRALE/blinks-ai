@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import WorkflowSteps from '../components/WorkflowSteps';
+import FooterNew from '../components/FooterNew';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <HeroSection />
         <WorkflowSteps />
       </main>
+      <FooterNew />
     </div>
   );
 }
