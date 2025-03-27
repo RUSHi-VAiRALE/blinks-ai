@@ -4,6 +4,7 @@ import WorkflowSteps from '../components/WorkflowSteps';
 import FooterNew from '../components/FooterNew';
 import AboutHero from '@/components/about/AboutHero';
 import ProblemSection from '@/components/about/ProblemSection';
+import ClientLogos from '@/components/ClientLogos';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <WorkflowSteps />
+        <ClientLogos />
         <AboutHero/>
         <ProblemSection />
       </main>
