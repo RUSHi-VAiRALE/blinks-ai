@@ -1,5 +1,6 @@
 // Navigation links data
 export const navLinks = [
+  { name: 'Explore Our Services', href: '/services' },
   { name: 'About', href: '/about' },
   { name: 'Testimonials', href: '/testimonials' },
   { name: 'AI Agent Development', href: '/ai-agent-development' }
@@ -19,19 +20,19 @@ export const serviceCategories = [
     name: 'Video Editing',
     subItems: [
       { 
-        name: 'Youtube Video Editing', 
+        name: 'Youtube Video', 
         subSubItems: [
-          { name: 'Basics', href: '/services/video-editing/youtube/basics' },
-          { name: 'PIP', href: '/services/video-editing/youtube/pip' },
-          { name: 'Motion Graphics', href: '/services/video-editing/youtube/motion' }
+          { name: 'Basics', href: '/services/youtube-video-editing' },
+          { name: 'PIP', href: '/services/youtube-video-editing' },
+          { name: 'Motion Graphics', href: '/services/youtube-video-editing' }
         ]
       },
       { 
-        name: 'Reels/Shorts Editing', 
+        name: 'Reels/Shorts', 
         subSubItems: [
-          { name: 'Basics', href: '/services/video-editing/reels-shorts/basics' },
-          { name: 'PIP', href: '/services/video-editing/reels-shorts/pip' },
-          { name: 'Motion Graphics', href: '/services/video-editing/reels-shorts/motion' }
+          { name: 'Basics', href: '/services/reels-shorts-editing' },
+          { name: 'PIP', href: '/services/reels-shorts-editing' },
+          { name: 'Motion Graphics', href: '/services/reels-shorts-editing' }
         ]
       }
     ]
@@ -39,46 +40,46 @@ export const serviceCategories = [
   {
     name: 'SEO',
     subItems: [
-      { name: 'On-Page SEO', href: '/services/seo/on-page' },
-      { name: 'Off-Page SEO', href: '/services/seo/off-page' },
-      { name: 'Local SEO', href: '/services/seo/local' },
-      { name: 'Technical SEO', href: '/services/seo/technical' }
+      { name: 'On-Page', href: '/services/seo-services' },
+      { name: 'Off-Page', href: '/services/seo-services' },
+      { name: 'Local', href: '/services/seo-services' },
+      { name: 'Technical', href: '/services/seo-services' }
     ]
   },
   {
     name: 'Copywriting',
     subItems: [
-      { name: 'SEO Copywriting', href: '/services/copywriting/seo' },
-      { name: 'Technical Copywriting', href: '/services/copywriting/technical' },
-      { name: 'Marketing Copywriting', href: '/services/copywriting/marketing' },
-      { name: 'Social Media Copywriting', href: '/services/copywriting/social-media' },
-      { name: 'B2B Copywriting', href: '/services/copywriting/b2b' }
+      { name: 'SEO', href: '/services/copywriting/' },
+      { name: 'Technical', href: '/services/copywriting/' },
+      { name: 'Marketing', href: '/services/copywriting/' },
+      { name: 'Social Media', href: '/services/copywriting/' },
+      { name: 'B2B', href: '/services/copywriting/' }
     ]
   },
   {
     name: 'Graphic Design',
     subItems: [
-      { name: 'Poster Design', href: '/services/graphic-design/poster' },
-      { name: 'Logo Design', href: '/services/graphic-design/logo' },
-      { name: 'Magazine Design', href: '/services/graphic-design/magazine' }
+      { name: 'Poster', href: '/services/graphic-design/' },
+      { name: 'Logo', href: '/services/graphic-design/' },
+      { name: 'Magazine', href: '/services/graphic-design/' }
     ]
   },
   {
     name: 'Lead Generation',
     subItems: [
-      { name: 'Meta Ads', href: '/services/lead-generation/meta' },
-      { name: 'Twitter Ads', href: '/services/lead-generation/twitter' },
-      { name: 'LinkedIn Ads', href: '/services/lead-generation/linkedin' },
-      { name: 'Google Ads', href: '/services/lead-generation/google' }
+      { name: 'Meta', href: '/services/lead-generation/' },
+      { name: 'Twitter', href: '/services/lead-generation/' },
+      { name: 'LinkedIn', href: '/services/lead-generation/' },
+      { name: 'Google', href: '/services/lead-generation/' }
     ]
   },
   {
     name: 'Social Media Management',
     subItems: [
-      { name: 'Meta Management', href: '/services/social-media/meta' },
-      { name: 'YouTube Management', href: '/services/social-media/youtube' },
-      { name: 'LinkedIn Management', href: '/services/social-media/linkedin' },
-      { name: 'Twitter Management', href: '/services/social-media/twitter' }
+      { name: 'Meta', href: '/services/social-media-management/' },
+      { name: 'YouTube', href: '/services/social-media-management/' },
+      { name: 'LinkedIn', href: '/services/social-media-management/' },
+      { name: 'Twitter', href: '/services/social-media-management/' }
     ]
   }
 ];

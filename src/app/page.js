@@ -2,6 +2,8 @@ import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import WorkflowSteps from '../components/WorkflowSteps';
 import FooterNew from '../components/FooterNew';
+import AboutHero from '@/components/about/AboutHero';
+import ProblemSection from '@/components/about/ProblemSection';
 
 export default function Home() {
   return (
@@ -9,6 +11,8 @@ export default function Home() {
       <main>
         <HeroSection />
         <WorkflowSteps />
+        <AboutHero/>
+        <ProblemSection />
       </main>
     </div>
   );

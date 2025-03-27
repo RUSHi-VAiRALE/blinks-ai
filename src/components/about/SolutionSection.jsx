@@ -4,10 +4,34 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from './AnimationVariants';
 
 const SolutionSection = () => {
+  // Solution items with icons
+  const solutionItems = [
+    {
+      text: 'Real-Time Tracking & Reporting – Instant clarity on ad performance, SEO growth, and content reach.',
+      icon: '📊',
+      title: 'Real-Time Tracking'
+    },
+    {
+      text: 'AI-Managed Workflow & Execution – No delays, no mismanagement.',
+      icon: '🤖',
+      title: 'AI-Managed Workflow'
+    },
+    {
+      text: 'Clear Financial Insights – Clients know exactly what they are paying for and what results to expect.',
+      icon: '💰',
+      title: 'Financial Clarity'
+    },
+    {
+      text: 'Prepaid Subscription Model – No follow-ups for payments, ensuring smooth operations.',
+      icon: '🔄',
+      title: 'Subscription Model'
+    }
+  ];
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       {/* Background effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-indigo-900/10 to-purple-900/10 opacity-30"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-purple-900/10 opacity-30"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -43,21 +67,20 @@ const SolutionSection = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16"
           >
-            {[
-              'Real-Time Tracking & Reporting – Instant clarity on ad performance, SEO growth, and content reach.',
-              'AI-Managed Workflow & Execution – No delays, no mismanagement.',
-              'Clear Financial Insights – Clients know exactly what they are paying for and what results to expect.',
-              'Prepaid Subscription Model – No follow-ups for payments, ensuring smooth operations.'
-            ].map((item, index) => (
+            {solutionItems.map((item, index) => (
               <motion.div 
                 key={index}
                 variants={fadeIn}
-                className="flex items-start gap-3 p-5 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 rounded-lg border border-zinc-700/50 hover:border-indigo-500/30 transition-all duration-300 shadow-sm hover:shadow-md"
+                className="flex flex-col items-center text-center p-6 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 rounded-lg border border-zinc-700/50 hover:border-indigo-500/30 transition-all duration-300 shadow-sm hover:shadow-md group"
+                whileHover={{ y: -5 }}
               >
-                <span className="text-green-500 text-xl font-bold">✓</span>
-                <span>{item}</span>
+                <span className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                <h3 className="text-lg font-semibold mb-2 group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-white group-hover:to-zinc-900 group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300">
+                  {item.title}
+                </h3>
+                <p className="text-gray-300">{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
