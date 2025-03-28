@@ -47,6 +47,18 @@ const ProblemSection = () => {
     return 'far-left';
   };
 
+  // Add a useEffect to handle window resize
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-zinc-900/50 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,7 +83,7 @@ const ProblemSection = () => {
             </p>
           </motion.div>
 
-          <div className="relative h-[600px] mb-12 flex items-center justify-center">
+          <div className="relative h-[400px] sm:h-[450px] md:h-[520px] lg:h-[600px] mb-12 flex items-center justify-center">
             {problems.map((problem, index) => (
               <ProblemCard 
                 key={index}
