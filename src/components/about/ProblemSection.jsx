@@ -48,9 +48,13 @@ const ProblemSection = () => {
   };
 
   // Add a useEffect to handle window resize
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  // Fix the window reference in useState initialization
+  const [windowWidth, setWindowWidth] = useState(0);
   
   useEffect(() => {
+    // Only access window in useEffect (client-side only)
+    setWindowWidth(window.innerWidth);
+    
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };

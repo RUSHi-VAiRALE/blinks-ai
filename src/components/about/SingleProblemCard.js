@@ -39,9 +39,9 @@ export default function ProblemCard({ problem, position, isActive }) {
   
     // Calculate styles based on position (left, center, right)
     const getCardStyles = () => {
-      // Check if we're on a mobile device
-      const isMobile = window.innerWidth < 768;
-      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      // Initialize with default values
+      const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+      const isTablet = typeof window !== 'undefined' ? (window.innerWidth >= 768 && window.innerWidth < 1024) : false;
       
       if (position === 'center') {
         return {
