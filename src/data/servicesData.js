@@ -955,3 +955,13 @@ export const getAllServiceCategories = () => {
     // Add other main categories
   ];
 };
+
+// Add these exports to your servicesData.js file
+
+export const contentMarketingServices = [
+  // Your content marketing services data
+];
+
+export const socialMediaServices = [
+  // Your social media services data
+];
