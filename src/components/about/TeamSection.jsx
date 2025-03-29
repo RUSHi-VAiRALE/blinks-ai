@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import ceoImage from '../../../public/alok.jpg'
-import ctoImage from '../../../public/nikhil.jpg'
+import ctoImage from '../../../public/nikhil.png'
 import { fadeIn, staggerContainer } from './AnimationVariants';
 
 const TeamSection = () => {
