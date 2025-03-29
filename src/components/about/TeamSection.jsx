@@ -2,6 +2,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import ceoImage from '../../../public/alok.jpg'
+import ctoImage from '../../../public/nikhil.jpg'
 import { fadeIn, staggerContainer } from './AnimationVariants';
 
 const TeamSection = () => {
@@ -9,13 +11,13 @@ const TeamSection = () => {
     {
       name: 'Alok Kumar',
       title: 'Founder & CEO',
-      image: '/team/founder.jpg', // You'll need to add these images to your public folder
+      image: ceoImage, // You'll need to add these images to your public folder
       bio: 'Visionary leader with extensive experience in digital marketing and AI technology integration.'
     },
     {
-      name: 'Zencodx',
+      name: 'Nikhil Kumar',
       title: 'Co-Founder & CTO',
-      image: '/team/cofounder.jpg',
+      image: ctoImage,
       bio: 'Technical genius behind our AI systems and software architecture.'
     },
     {
@@ -65,12 +67,12 @@ const TeamSection = () => {
                       <span className="text-4xl">👤</span>
                     </div>
                     {/* Uncomment when images are available */}
-                    {/* <Image 
+                    <Image 
                       src={member.image}
                       alt={member.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    /> */}
+                    />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
                     <h3 className={`text-xl font-bold mb-1 ${member.name === 'Alok Kumar' ? 'bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text' : member.name === 'Zencodx' ? 'text-white font-bold' : 'text-white'}`}>
