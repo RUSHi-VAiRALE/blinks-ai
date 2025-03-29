@@ -21,7 +21,11 @@ import {
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
-  FaGoogle
+  FaGoogle,
+  FaRobot,
+  FaVideo,
+  FaSearch,
+  FaUsers
 } from 'react-icons/fa';
 
 // Development Services
@@ -42,8 +46,8 @@ export const webDevelopmentServices = {
         "Mobile-responsive design"
       ],
       sampleImages: [
-        "/images/services/ecommerce-1.jpg",
-        "/images/services/ecommerce-2.jpg"
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg",
+        "https://cdn.pixabay.com/photo/2023/08/18/08/05/woman-8198027_1280.jpg"
       ],
       questions: [
         "What products do you sell?",
@@ -65,8 +69,8 @@ export const webDevelopmentServices = {
         "Certificate generation"
       ],
       sampleImages: [
-        "/images/services/educational-1.jpg",
-        "/images/services/educational-2.jpg"
+        "https://cdn.pixabay.com/photo/2023/08/18/08/05/woman-8198027_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg"
       ],
       questions: [
         "What type of educational content will you offer?",
@@ -88,8 +92,8 @@ export const webDevelopmentServices = {
         "Analytics dashboard"
       ],
       sampleImages: [
-        "/images/services/lms-1.jpg",
-        "/images/services/lms-2.jpg"
+        "https://cdn.pixabay.com/photo/2023/08/18/08/05/woman-8198027_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg"
       ],
       questions: [
         "What is the primary purpose of your LMS?",
@@ -119,8 +123,8 @@ export const appDevelopmentServices = {
         "App Store optimization"
       ],
       sampleImages: [
-        "/images/services/ios-1.jpg",
-        "/images/services/ios-2.jpg"
+        "https://cdn.pixabay.com/photo/2023/08/18/08/05/woman-8198027_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg"
       ],
       questions: [
         "What is the core functionality of your app?",
@@ -833,7 +837,7 @@ export const socialMediaManagementServices = {
         "Performance analytics"
       ],
       sampleImages: [
-        "/images/services/meta-management-1.jpg",
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg",
         "/images/services/meta-management-2.jpg"
       ],
       questions: [
@@ -857,7 +861,7 @@ export const socialMediaManagementServices = {
       ],
       sampleImages: [
         "/images/services/youtube-management-1.jpg",
-        "/images/services/youtube-management-2.jpg"
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg"
       ],
       questions: [
         "What is your YouTube content strategy?",
@@ -880,7 +884,7 @@ export const socialMediaManagementServices = {
       ],
       sampleImages: [
         "/images/services/linkedin-management-1.jpg",
-        "/images/services/linkedin-management-2.jpg"
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg"
       ],
       questions: [
         "What are your LinkedIn objectives?",
@@ -903,7 +907,7 @@ export const socialMediaManagementServices = {
       ],
       sampleImages: [
         "/images/services/twitter-management-1.jpg",
-        "/images/services/twitter-management-2.jpg"
+        "https://cdn.pixabay.com/photo/2024/04/01/13/21/ai-generated-8668923_1280.jpg"
       ],
       questions: [
         "What is your Twitter voice and tone?",
@@ -911,6 +915,153 @@ export const socialMediaManagementServices = {
         "Who are your target followers?",
         "What is your engagement strategy?",
         "Do you want to participate in Twitter chats or spaces?"
+      ]
+    }
+  ]
+};
+
+// AI Agents Services
+export const aiAgentsServices = {
+  title: "Custom AI Agents",
+  description: "Intelligent AI agents tailored to automate and enhance your business operations.",
+  icon: <FaRobot className="text-2xl text-white" />,
+  subCategories: [
+    {
+      name: "Web & App Development Agents",
+      description: "AI agents that optimize website performance and enhance app user experience.",
+      icon: <FaCode className="text-2xl text-white" />,
+      features: [
+        "Real-time site performance monitoring",
+        "Automated UI/UX improvement recommendations",
+        "Error detection and fix suggestions",
+        "Mobile app performance tracking",
+        "Usage analytics and crash reporting"
+      ],
+      sampleImages: [
+        "https://cdn.pixabay.com/photo/2023/11/01/17/12/ai-generated-8358416_1280.jpg",
+        "https://cdn.pixabay.com/photo/2023/05/24/17/49/ai-generated-8015427_1280.jpg"
+      ],
+      questions: [
+        "What specific performance metrics are most important to your business?",
+        "Do you need cross-browser or cross-device compatibility monitoring?",
+        "What type of user experience data would be most valuable to you?",
+        "Are there specific error patterns you're currently experiencing?",
+        "Do you need integration with existing analytics platforms?"
+      ]
+    },
+    {
+      name: "Enterprise Solutions Agents",
+      description: "AI agents that monitor system health and optimize API performance for enterprise software.",
+      icon: <FaServer className="text-2xl text-white" />,
+      features: [
+        "Continuous system performance monitoring",
+        "Enterprise solution integration",
+        "Real-time bottleneck alerts",
+        "API response time tracking",
+        "Code adjustment recommendations"
+      ],
+      sampleImages: [
+        "https://cdn.pixabay.com/photo/2024/06/20/05/19/ai-generated-8841179_1280.jpg",
+        "https://cdn.pixabay.com/photo/2023/08/05/01/15/ai-generated-8170159_1280.jpg"
+      ],
+      questions: [
+        "What enterprise systems do you currently use?",
+        "What are your current integration pain points?",
+        "How do you currently monitor system performance?",
+        "What API performance metrics are most critical to your operations?",
+        "Do you have specific scaling challenges you're trying to address?"
+      ]
+    },
+    {
+      name: "Video Editing Agents",
+      description: "AI agents that automate and enhance video editing workflows and motion graphics design.",
+      icon: <FaVideo className="text-2xl text-white" />,
+      features: [
+        "Intelligent footage analysis",
+        "Automated color grading and audio leveling",
+        "Smart cut and transition suggestions",
+        "Dynamic template recommendations",
+        "Real-time motion graphics previews"
+      ],
+      sampleImages: [
+        "https://cdn.pixabay.com/photo/2024/06/21/06/09/ai-generated-8843638_1280.jpg",
+        "https://cdn.pixabay.com/photo/2023/06/05/19/13/robot-8043131_1280.jpg"
+      ],
+      questions: [
+        "What type of video content do you typically produce?",
+        "Do you have established brand guidelines for your videos?",
+        "What are your biggest time-consuming tasks in video editing?",
+        "Do you need assistance with specific effects or transitions?",
+        "What is your current video editing workflow?"
+      ]
+    },
+    {
+      name: "SEO & Content Agents",
+      description: "AI agents that optimize search visibility and generate engaging, conversion-focused content.",
+      icon: <FaSearch className="text-2xl text-white" />,
+      features: [
+        "Automated keyword research",
+        "Competitive analysis",
+        "Technical SEO monitoring",
+        "SEO-optimized content generation",
+        "Readability and engagement analysis"
+      ],
+      sampleImages: [
+        "https://cdn.pixabay.com/photo/2023/10/26/21/10/ai-generated-8343518_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/03/20/04/24/ai-generated-8644599_1280.jpg"
+      ],
+      questions: [
+        "What are your primary SEO goals?",
+        "Who are your main competitors?",
+        "What type of content do you need to generate regularly?",
+        "What audience segments are you targeting?",
+        "Do you have specific keywords you're trying to rank for?"
+      ]
+    },
+    {
+      name: "Design & Branding Agents",
+      description: "AI agents that provide design inspiration and automate mockup creation based on brand guidelines.",
+      icon: <FaPaintBrush className="text-2xl text-white" />,
+      features: [
+        "Design trend analysis",
+        "Automated mockup generation",
+        "Brand consistency monitoring",
+        "Layout improvement suggestions",
+        "Design tool integration"
+      ],
+      sampleImages: [
+        "https://cdn.pixabay.com/photo/2024/09/17/02/28/ai-generated-9052691_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/08/10/17/34/ai-generated-8959823_1280.png"
+      ],
+      questions: [
+        "Do you have established brand guidelines?",
+        "What design elements do you need help with most frequently?",
+        "What design tools do you currently use?",
+        "Do you need assistance with specific types of designs?",
+        "How do you currently evaluate design effectiveness?"
+      ]
+    },
+    {
+      name: "Lead Generation & Social Media Agents",
+      description: "AI agents that score leads and optimize social media engagement for maximum conversion.",
+      icon: <FaUsers className="text-2xl text-white" />,
+      features: [
+        "Multi-source lead data analysis",
+        "Automated lead scoring",
+        "Personalized outreach automation",
+        "Social media performance monitoring",
+        "Optimal posting time analysis"
+      ],
+      sampleImages: [
+        "https://cdn.pixabay.com/photo/2024/04/26/17/15/humanoid-8722288_1280.png",
+        "https://cdn.pixabay.com/photo/2024/03/20/03/06/ai-generated-8644499_1280.jpg"
+      ],
+      questions: [
+        "What are your current lead sources?",
+        "How do you currently qualify and score leads?",
+        "Which social platforms are most important to your business?",
+        "What metrics do you use to measure social media success?",
+        "Do you have specific conversion goals for your campaigns?"
       ]
     }
   ]
@@ -930,7 +1081,8 @@ export const serviceMap = {
   "Copywriting": copywritingServices,
   "Graphic Design": graphicDesignServices,
   "Lead Generation": leadGenerationServices,
-  "Social Media Management": socialMediaManagementServices
+  "Social Media Management": socialMediaManagementServices,
+  "Custom AI Agents": aiAgentsServices
   // Add mappings for other services
 };
 
@@ -951,7 +1103,8 @@ export const getAllServiceCategories = () => {
     copywritingServices,
     graphicDesignServices,
     leadGenerationServices,
-    socialMediaManagementServices
+    socialMediaManagementServices,
+    aiAgentsServices
     // Add other main categories
   ];
 };

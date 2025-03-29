@@ -24,7 +24,7 @@ const staggerContainer = {
   }
 };
 
-const ServiceCategoryView = ({ serviceData }) => {
+const AIAgentCategoryView = ({ serviceData }) => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
@@ -64,44 +64,53 @@ const ServiceCategoryView = ({ serviceData }) => {
 
   if (!serviceData) return null;
 
-  // Sample website templates grid based on selected subcategory
-  const getTemplateGrid = () => {
-    const templates = [
-      { id: 1, name: 'Template 1', image: '/images/template1.jpg' },
-      { id: 2, name: 'Template 2', image: '/images/template2.jpg' },
-      { id: 3, name: 'Template 3', image: '/images/template3.jpg' },
-      { id: 4, name: 'Template 4', image: '/images/template4.jpg' },
-    ];
+  // Get use cases based on category name
+  const getUseCases = (categoryName) => {
+    const useCases = {
+      "Web & App Development Agents": [
+        "E-commerce websites",
+        "SaaS applications",
+        "Mobile apps with high traffic",
+        "Customer-facing portals"
+      ],
+      "Enterprise Solutions Agents": [
+        "Large corporate systems",
+        "Multi-service architectures",
+        "High-volume API services",
+        "Legacy system integrations"
+      ],
+      "Video Editing Agents": [
+        "Content creators",
+        "Marketing teams",
+        "Production studios",
+        "Social media managers"
+      ],
+      "SEO & Content Agents": [
+        "Digital marketing agencies",
+        "Content publishers",
+        "E-commerce businesses",
+        "Blog networks"
+      ],
+      "Design & Branding Agents": [
+        "Creative agencies",
+        "Marketing departments",
+        "Brand managers",
+        "Digital product teams"
+      ],
+      "Lead Generation & Social Media Agents": [
+        "Sales teams",
+        "Marketing departments",
+        "Social media managers",
+        "Digital advertisers"
+      ]
+    };
     
-    return (
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {templates.map((template) => (
-          <div 
-            key={template.id}
-            className="relative overflow-hidden rounded-lg group cursor-pointer border border-zinc-700/30 transition-all duration-300 hover:border-white/30"
-          >
-            {/* Template image placeholder */}
-            <div className="aspect-video bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/50 to-black/80 group-hover:opacity-70 transition-opacity duration-300"></div>
-              <div className="text-center z-10 p-4">
-                <div className="inline-block p-3 rounded-full bg-gradient-to-r from-white/10 to-zinc-800/30 backdrop-blur-sm mb-3">
-                  {selectedSubCategory.icon}
-                </div>
-                <h4 className="text-lg font-medium text-white">{template.name}</h4>
-                <p className="text-sm text-gray-400 mt-1">{selectedSubCategory.name} Design</p>
-              </div>
-            </div>
-            
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-              <button className="px-4 py-2 bg-white text-black rounded-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                View Template
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
+    return useCases[categoryName] || [
+      "Businesses seeking automation",
+      "Teams looking to scale operations",
+      "Organizations needing data insights",
+      "Companies focused on digital transformation"
+    ];
   };
 
   return (
@@ -147,7 +156,7 @@ const ServiceCategoryView = ({ serviceData }) => {
                 boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.3)'
               }}
             >
-              <h3 className="text-xl font-semibold mb-4 text-white">Categories</h3>
+              <h3 className="text-xl font-semibold mb-4 text-white">AI Agent Categories</h3>
               <div className="space-y-2">
                 {serviceData.subCategories.map((subCategory, index) => (
                   <button
@@ -211,7 +220,7 @@ const ServiceCategoryView = ({ serviceData }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
                       {/* Left column - Features */}
                       <div>
-                        <h3 className="text-xl font-semibold mb-4 text-white">Features</h3>
+                        <h3 className="text-xl font-semibold mb-4 text-white">Key Features</h3>
                         <ul className="space-y-3">
                           {selectedSubCategory.features.map((feature, index) => (
                             <li key={index} className="flex items-start">
@@ -221,15 +230,15 @@ const ServiceCategoryView = ({ serviceData }) => {
                           ))}
                         </ul>
 
-                        {/* Questions section - now visible by default */}
+                        {/* Use Cases section */}
                         <div className="mt-6">
                           <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 rounded-lg p-4 border-l-2 border-white/30">
-                            <h4 className="text-lg font-medium mb-3 bg-gradient-to-r from-white to-zinc-400 text-transparent bg-clip-text">Discovery Questions</h4>
+                            <h4 className="text-lg font-medium mb-3 bg-gradient-to-r from-white to-zinc-400 text-transparent bg-clip-text">Ideal For</h4>
                             <ul className="space-y-2">
-                              {selectedSubCategory.questions.map((question, index) => (
+                              {getUseCases(selectedSubCategory.name).map((useCase, index) => (
                                 <li key={index} className="text-gray-300 flex items-start">
-                                  <span className="text-zinc-500 mr-2">{index + 1}.</span>
-                                  <span>{question}</span>
+                                  <span className="text-zinc-500 mr-2">→</span>
+                                  <span>{useCase}</span>
                                 </li>
                               ))}
                             </ul>
@@ -237,43 +246,62 @@ const ServiceCategoryView = ({ serviceData }) => {
                         </div>
                       </div>
 
-                      {/* Right column - Sample images */}
+                      {/* Right column - Sample images and questions */}
                       <div>
                         <h3 className="text-xl font-semibold mb-4 text-white">Examples</h3>
                         
-                        {selectedSubCategory.sampleImages && selectedSubCategory.sampleImages.length > 0 ? (
-                          <div className="relative rounded-lg overflow-hidden aspect-video bg-gradient-to-br from-zinc-800 to-black border border-zinc-700/30">
-                            {/* Image placeholder - in production, replace with actual images */}
-                            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-800 to-black">
-                            <Image 
+                        {/* Default image if none is provided */}
+                        <div className="relative rounded-lg overflow-hidden aspect-video bg-gradient-to-br from-zinc-800 to-black border border-zinc-700/30">
+                          {/* Use actual image if available, otherwise show placeholder */}
+                          {selectedSubCategory.sampleImages && selectedSubCategory.sampleImages.length > 0 ? (
+                            <div className="relative w-full h-full">
+                              <Image 
                                 src={selectedSubCategory.sampleImages[activeImageIndex] || '/blinksaiimg.jpg'}
                                 alt={`${selectedSubCategory.name} example`}
                                 fill
                                 className="object-cover"
                               />
+                              
+                              {/* Image navigation dots */}
+                              {selectedSubCategory.sampleImages.length > 1 && (
+                                <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+                                  {selectedSubCategory.sampleImages.map((_, index) => (
+                                    <button
+                                      key={index}
+                                      onClick={() => setActiveImageIndex(index)}
+                                      className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                                        index === activeImageIndex ? 'bg-white' : 'bg-zinc-600'
+                                      }`}
+                                      aria-label={`View image ${index + 1}`}
+                                    />
+                                  ))}
+                                </div>
+                              )}
                             </div>
-                            
-                            {/* Image navigation dots */}
-                            {selectedSubCategory.sampleImages.length > 1 && (
-                              <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
-                                {selectedSubCategory.sampleImages.map((_, index) => (
-                                  <button
-                                    key={index}
-                                    onClick={() => setActiveImageIndex(index)}
-                                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                                      index === activeImageIndex ? 'bg-white' : 'bg-zinc-600'
-                                    }`}
-                                    aria-label={`View image ${index + 1}`}
-                                  />
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ) : (
-                          <div className="rounded-lg overflow-hidden aspect-video bg-gradient-to-br from-zinc-800 to-black border border-zinc-700/30 flex items-center justify-center">
-                            <p className="text-zinc-500">No examples available</p>
-                          </div>
-                        )}
+                          ) : (
+                            <div className="relative w-full h-full">
+                              <Image 
+                                src="/blinksaiimg.jpg"
+                                alt={`${selectedSubCategory.name} example`}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Questions section */}
+                        <div className="mt-6">
+                          <h4 className="text-lg font-medium mb-3 text-white">Discovery Questions</h4>
+                          <ul className="space-y-2 bg-zinc-800/30 p-4 rounded-lg">
+                            {selectedSubCategory.questions.map((question, index) => (
+                              <li key={index} className="text-gray-300 flex items-start">
+                                <span className="text-zinc-500 mr-2">{index + 1}.</span>
+                                <span>{question}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                         
                         {/* CTA Button with enhanced gradient */}
                         <div className="mt-6">
@@ -287,18 +315,48 @@ const ServiceCategoryView = ({ serviceData }) => {
                       </div>
                     </div>
                     
-                    {/* Website Templates Grid Section */}
+                    {/* Implementation Process Section */}
                     <div className="p-6 border-t border-zinc-800/50" style={{
                       background: 'linear-gradient(to bottom, rgba(24,24,27,0.5), rgba(9,9,11,0.7))'
                     }}>
                       <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text">
-                        {selectedSubCategory.name} Templates
+                        Implementation Process
                       </h3>
-                      <p className="text-gray-300 mb-4">
-                        Browse our collection of professionally designed {selectedSubCategory.name.toLowerCase()} templates.
+                      <p className="text-gray-300 mb-6">
+                        Our streamlined approach to implementing {selectedSubCategory.name.toLowerCase()} for your business.
                       </p>
                       
-                      {getTemplateGrid()}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-zinc-800/30 p-4 rounded-lg border border-zinc-700/30">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-black flex items-center justify-center mb-3">
+                            <span className="text-white font-bold">1</span>
+                          </div>
+                          <h4 className="text-lg font-medium mb-2 text-white">Analysis</h4>
+                          <p className="text-gray-400 text-sm">
+                            We analyze your business processes and requirements to identify optimization opportunities.
+                          </p>
+                        </div>
+                        
+                        <div className="bg-zinc-800/30 p-4 rounded-lg border border-zinc-700/30">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-black flex items-center justify-center mb-3">
+                            <span className="text-white font-bold">2</span>
+                          </div>
+                          <h4 className="text-lg font-medium mb-2 text-white">Implementation</h4>
+                          <p className="text-gray-400 text-sm">
+                            We deploy custom-trained AI agents that integrate seamlessly with your existing systems.
+                          </p>
+                        </div>
+                        
+                        <div className="bg-zinc-800/30 p-4 rounded-lg border border-zinc-700/30">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-black flex items-center justify-center mb-3">
+                            <span className="text-white font-bold">3</span>
+                          </div>
+                          <h4 className="text-lg font-medium mb-2 text-white">Continuous Improvement</h4>
+                          <p className="text-gray-400 text-sm">
+                            Our agents continuously learn and adapt to provide increasingly valuable insights.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -320,10 +378,10 @@ const ServiceCategoryView = ({ serviceData }) => {
             }}
           >
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text">
-              Ready to elevate your {serviceData.title.toLowerCase()} experience?
+              Ready to transform your business with AI agents?
             </h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Our team of experts is ready to help you achieve your goals with tailored solutions.
+              Our team of experts is ready to help you achieve your goals with tailored AI solutions.
             </p>
             <Link 
               href="/contact" 
@@ -350,4 +408,4 @@ const ServiceCategoryView = ({ serviceData }) => {
   );
 };
 
-export default ServiceCategoryView;
+export default AIAgentCategoryView;

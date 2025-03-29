@@ -3,7 +3,7 @@ export const navLinks = [
   { name: 'Explore Our Services', href: '/services' },
   { name: 'About', href: '/about' },
   { name: 'Testimonials', href: '/testimonials' },
-  { name: 'AI Agent Development', href: '/ai-agent-development' }
+  { name: 'AI Agent Development', href: '/services/ai-agent-development' },
 ];
 
 // Services submenu data
@@ -80,6 +80,17 @@ export const serviceCategories = [
       { name: 'YouTube', href: '/services/social-media-management/' },
       { name: 'LinkedIn', href: '/services/social-media-management/' },
       { name: 'Twitter', href: '/services/social-media-management/' }
+    ]
+  },
+  {
+    name: 'Custom AI Agents',
+    subItems: [
+      { name: 'Web & App Development', href: '/services/custom-ai-agents/web-app' },
+      { name: 'Enterprise Solutions', href: '/services/custom-ai-agents/enterprise' },
+      { name: 'Video Editing', href: '/services/custom-ai-agents/video' },
+      { name: 'SEO & Content', href: '/services/custom-ai-agents/seo-content' },
+      { name: 'Design & Branding', href: '/services/custom-ai-agents/design' },
+      { name: 'Lead Generation & Social Media', href: '/services/custom-ai-agents/lead-social' }
     ]
   }
 ];

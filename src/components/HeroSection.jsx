@@ -150,7 +150,7 @@ const HeroSection = () => {
                   <div className="w-full lg:w-1/2">
                     <div className="relative w-full aspect-square bg-zinc-800 rounded-2xl flex items-center justify-center shadow-md">
                       <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-2xl">
-                      <Image src={logo} alt="Logo" fill className='rounded-2xl object-cover' />
+                      <Image src="https://cdn.pixabay.com/photo/2024/01/26/14/18/cyborg-8534055_1280.png" alt="Logo" fill className='rounded-2xl object-cover' />
                       </div>
                     </div>
                   </div>
