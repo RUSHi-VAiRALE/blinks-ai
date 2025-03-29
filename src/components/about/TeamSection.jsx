@@ -59,7 +59,7 @@ const TeamSection = () => {
                 variants={fadeIn}
                 className="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 rounded-xl overflow-hidden border border-zinc-700/50 hover:border-indigo-500/30 transition-all duration-300 group shadow-sm hover:shadow-md"
               >
-                <div className="relative h-64 w-full overflow-hidden">
+                <div className="relative h-92 md:h-80 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10"></div>
                   <div className="w-full h-full relative">
                     {/* Placeholder div for image - replace with actual Image component when images are available */}
