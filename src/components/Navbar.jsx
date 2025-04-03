@@ -56,7 +56,7 @@ const Navbar = () => {
           <DesktopMenu />
 
           {/* Mobile menu button */}
-          <div className="md:hidden ml-auto">
+          <div className="lg:hidden ml-auto">
             <button 
               onClick={toggleMenu}
               className="text-white focus:outline-none"

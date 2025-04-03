@@ -26,7 +26,7 @@ const SplitTextAnimation = ({ text }) => {
       y: 0,
       transition: {
         type: "spring",
-        damping: 12,
+        damping: 8,
         stiffness: 100,
       },
     },
@@ -35,7 +35,7 @@ const SplitTextAnimation = ({ text }) => {
       y: 20,
       transition: {
         type: "spring",
-        damping: 12,
+        damping: 8,
         stiffness: 100,
       },
     },
