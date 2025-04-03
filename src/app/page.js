@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar';
+
 import HeroSection from '../components/HeroSection';
 import WorkflowSteps from '../components/WorkflowSteps';
 import AboutHero from '@/components/about/AboutHero';
