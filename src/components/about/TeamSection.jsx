@@ -13,18 +13,6 @@ const TeamSection = () => {
       title: 'Founder & CEO',
       image: ceoImage, // You'll need to add these images to your public folder
       bio: 'Visionary leader with extensive experience in digital marketing and AI technology integration.'
-    },
-    {
-      name: 'Nikhil Kumar',
-      title: 'Co-Founder & CTO',
-      image: ctoImage,
-      bio: 'Technical genius behind our AI systems and software architecture.'
-    },
-    {
-      name: 'Rushikesh Vairale',
-      title: 'Developer',
-      image: '/team/developer.jpg',
-      bio: 'Expert in React, Next.js, and AI integration for web applications.'
     }
   ];
 
@@ -38,14 +26,14 @@ const TeamSection = () => {
           variants={staggerContainer}
           className="max-w-5xl mx-auto"
         >
-          <motion.h2 
+          <motion.h2
             variants={fadeIn}
             className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-white via-white to-zinc-900 text-transparent bg-clip-text"
           >
             Our Team
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             variants={fadeIn}
             className="text-gray-300 mb-12 text-center"
           >
@@ -67,7 +55,7 @@ const TeamSection = () => {
                       <span className="text-4xl">👤</span>
                     </div>
                     {/* Uncomment when images are available */}
-                    <Image 
+                    <Image
                       src={member.image}
                       alt={member.name}
                       fill
